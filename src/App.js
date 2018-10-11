@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import io from "socket.io-client";
+import Chat from './components/Chat';
+import UsersList from './components/UsersList';
+import Sketch from './components/Sketch';
+
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    const regexPort = new RegExp(':[\\d]+/');
+    var url = window.location.href.split(regexPort)[0];
+    var port = process.env.PORT || 8000;
+    this.socket = io(url + ':' + port);
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <div className="container-fluid h-100">
+            <div className="row w-100 h-100">
+                <div className="col-md-3"><UsersList username="bob" socket={this.socket}/></div>
+                <div className="col-md-6"><Sketch username="bob" socket={this.socket}/></div>
+                <div className="col-md-3"><Chat username="bob" socket={this.socket}/></div>
+            </div>
+        </div>
     );
   }
 }
