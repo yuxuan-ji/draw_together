@@ -1,75 +1,40 @@
-import React from "react";
+export default function sketch (p) {
+  
+  let socket;
 
-export default class Sketch extends React.Component{
-    constructor(props) {
-        super(props);
+  p.setup = function () {
+    p.createCanvas(670, 600);
+    p.background(250);
+    socket.on('DRAWING', function(data) {
+        p.strokeWeight(10);
+        p.line(data.mouseX, data.mouseY, data.pmouseX, data.pmouseY);        
+    });
+  };
 
-        this.state = {
-            username: props.username,
-            message: '',
-            messages: []
-        };
-
-        this.socket = props.socket;
-
-        this.socket.on('RECEIVE_MESSAGE', (data) => {
-            addMessage(data);
-            updateScroll();
-        });
-
-        const addMessage = (data) => {
-            console.log(data);
-            this.setState({messages: [...this.state.messages, data]});
-        };
-
-        const updateScroll = () =>{
-            var element = document.getElementById("messages");
-            element.scrollTop = element.scrollHeight;
-        };
-
-        this.sendMessage = (event) => {
-            // event.preventDefault();
-            this.socket.emit('SEND_MESSAGE', {
-                author: this.state.username,
-                message: this.state.message
-            });
-            this.setState({message: ''});
-        };
-
-        this.onEnterKey = (event => {
-            if (event.key === 'Enter') {
-                this.sendMessage(event);                
-            }
-        });
-
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    if (props.socket){
+     socket = props.socket;
     }
+  };
 
-    render(){
-        return (
-            <div className="container-fluid h-100">
-                <div className="row h-100">
-                    <div className="card w-100 h-100">
-                        <div className="card-body">
-                            <div className="card-title">Chat</div>
-                            <hr/>
-                            <div id="messages" className="Chat-messages pre-scrollable h-100">
-                                {this.state.messages.map((message, i) => {                                
-                                    return (
-                                        <div key={i}>{message.author}: {message.message}</div>
-                                    )
-                                })}
-                            </div>
+  p.draw = function() {
 
-                        </div>
+  };
 
-                        <div className="card-footer">
-                            <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={event => this.setState({message: event.target.value})}
-                            onKeyPress={this.onEnterKey}/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+  p.mouseDragged = function() {
+
+    p.strokeWeight(10);
+    p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
+
+    socket.emit('DRAWING', {
+        mouseX: p.mouseX,
+        mouseY: p.mouseY,
+        pmouseX: p.pmouseX,
+        pmouseY: p.pmouseY
+    });
+
+  };
+
+
 
 }

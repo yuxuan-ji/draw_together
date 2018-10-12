@@ -19,7 +19,6 @@ export default class Chat extends React.Component{
         });
 
         const addMessage = (data) => {
-            console.log(data);
             this.setState({messages: [...this.state.messages, data]});
         };
 
