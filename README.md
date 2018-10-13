@@ -8,7 +8,7 @@ Draw Together is a shared canvas game where one player draws a word, and the oth
 * refer to package.json
 
 ## Current Progress
-![progress](imgs/progress.png)
+![progress](imgs/progress.PNG)
 
 ## Deployment
 You can deploy to heroku following the basic procedures.
