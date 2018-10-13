@@ -11,7 +11,13 @@ Draw Together is a shared canvas game where one player draws a word, and the oth
 ![progress](imgs/progress.PNG)
 
 ## Deployment
-You can deploy to heroku following the basic procedures.
+### Locally
+```
+$ npm run build
+$ npm start
+```
+### Heroku
+Follow the basic procedures:
 i.e. after setting up Heroku CLI and your project:
 ```
 $ git add .
