@@ -15,8 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     var url = window.location.origin;
-    var port = 8000;
-    console.log('front port:' + process.env.PORT);
+    var port = process.env.PORT || 8000;
+    console.log('front port:' + port);
     this.socket = io(url + ':' + port);
 
     while (!this.username) {
