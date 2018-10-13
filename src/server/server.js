@@ -2,6 +2,7 @@ var express = require('express');
 var socket = require('socket.io');
 
 var app = express();
+app.use(express.static('/build'));
 
 var PORT = process.env.PORT || 8000;
 var server = app.listen(PORT, function(){
