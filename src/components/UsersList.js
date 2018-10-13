@@ -11,12 +11,15 @@ export default class UserList extends React.Component{
         };
 
         this.socket = props.socket;
-        console.log('socket ' + this.socket.socket.id);
-        this.socket.emit('ENTER_LOBBY', {
-            username: this.state.username,
-            socketId: this.socket.id
-        });
+        this.socket.on('connect', () => {
 
+            this.socket.emit('ENTER_LOBBY', {
+                username: this.state.username,
+                socketId: this.socket.id
+            });
+
+        });
+        
         this.socket.on('ENTER_LOBBY', (newUsersList) => {
             updateUserList(newUsersList);
         });
@@ -29,11 +32,14 @@ export default class UserList extends React.Component{
             this.setState({userList: newUsersList});
         };
 
+
     }
 
     handleLeavePage(event) {
         this.socket.emit('EXIT_LOBBY', {
-            username: this.state.username
+            username: this.state.username,
+            socketId: this.socket.id
+
         });
     }
     componentDidMount() {
