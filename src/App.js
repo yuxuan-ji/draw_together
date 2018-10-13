@@ -14,9 +14,9 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    const regexPort = new RegExp(':[\\d]+/');
-    var url = window.location.href.split(regexPort)[0];
-    var port = process.env.PORT || 8000;
+    var url = window.location.origin;
+    var port = 8000;
+    console.log('front port:' + process.env.PORT);
     this.socket = io(url + ':' + port);
 
     while (!this.username) {

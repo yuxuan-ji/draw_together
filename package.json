@@ -19,7 +19,7 @@
     "socket.io-client": "^2.1.1"
   },
   "scripts": {
-    "start": "nodemon ./server/server.js",
+    "start": "PORT=8000 nodemon ./server/server.js",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
