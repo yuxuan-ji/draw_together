@@ -13,6 +13,7 @@ Draw Together is a shared canvas game where one player draws a word, and the oth
 ## Deployment
 ### Locally
 ```
+$ npm install
 $ npm run build
 $ npm start
 ```
