@@ -1,6 +1,6 @@
 # Draw Together ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-Draw Together is a shared canvas game where one player draws a word, and the other players tries to guess it.
+Draw Together is a shared canvas game where one player draws a word, and the other players try to guess it.
 
 ## Installation
 
