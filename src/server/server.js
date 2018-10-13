@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
     socket.on('ENTER_LOBBY', function(data){
         //Add user to usersList, and let every user know of the current usersList
         usersList.push(data);
+        console.log(data);
         io.emit('ENTER_LOBBY', usersList);
     });
 

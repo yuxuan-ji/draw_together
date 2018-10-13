@@ -4,6 +4,10 @@ import io from "socket.io-client";
 import Chat from './components/Chat';
 import UsersList from './components/UsersList';
 import Canvas from './components/Canvas';
+// import 'popper.js';
+// import 'bootstrap';
+// import $ from 'jquery';
+// import bootbox from 'bootbox';
 
 
 class App extends Component {
@@ -15,15 +19,19 @@ class App extends Component {
     var port = process.env.PORT || 8000;
     this.socket = io(url + ':' + port);
 
+    while (!this.username) {
+        this.username = prompt("Enter your username");
+    }
+
   }
 
   render() {
     return (
         <div className="container-fluid h-100">
             <div className="row w-100 h-100">
-                <div className="col-md-3"><UsersList username="bob" socket={this.socket}/></div>
-                <div className="col-md-6"><Canvas username="bob" socket={this.socket}/></div>
-                <div className="col-md-3"><Chat username="bob" socket={this.socket}/></div>
+                <div className="col-md-3"><UsersList username={this.username} socket={this.socket}/></div>
+                <div className="col-md-6"><Canvas username={this.username} socket={this.socket}/></div>
+                <div className="col-md-3"><Chat username={this.username} socket={this.socket}/></div>
             </div>
         </div>
     );

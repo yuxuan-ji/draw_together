@@ -11,8 +11,10 @@ export default class UserList extends React.Component{
         };
 
         this.socket = props.socket;
+        console.log('socket ' + this.socket.socket.id);
         this.socket.emit('ENTER_LOBBY', {
-            username: this.state.username
+            username: this.state.username,
+            socketId: this.socket.id
         });
 
         this.socket.on('ENTER_LOBBY', (newUsersList) => {
@@ -26,8 +28,6 @@ export default class UserList extends React.Component{
         const updateUserList = (newUsersList) => {
             this.setState({userList: newUsersList});
         };
-
-
 
     }
 
